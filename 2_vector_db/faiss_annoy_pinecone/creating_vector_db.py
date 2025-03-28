@@ -7,7 +7,15 @@ load_dotenv()
 
 try:
     # initialize the pinecore api key
-    pc = Pinecone(api_key= 'pcsk_27UvEa_PHyZ3n7E6euuUHXg7CPCjSb7HmEDe8j1XqzqmHLZHgpswygWhAHu7weNmuqWDrT')
+    PINECONE_API_KEY = os.environ.get("PINECONE_API_KEY")
+    if not PINECONE_API_KEY:
+        PINECONE_API_KEY = input("Please enter your PINECONE API key: ")
+        os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
+        pc = Pinecone(api_key=os.environ['PINECONE_API_KEY'])
+
+    # initialize the pinecore api key
+    # pc = Pinecone(api_key= 'pcsk_27UvEa_PHyZ3n7E6euuUHXg7CPCjSb7HmEDe8j1XqzqmHLZHgpswygWhAHu7weNmuqWDrT')
+
     print("Pinecone initialized successfully.")
 
     # Load a pre-trained model
